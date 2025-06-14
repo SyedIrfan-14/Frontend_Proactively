@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: './', // Changed to './' for Vercel
+    publicPath: './', // or './'
     clean: true
   },
   resolve: {
@@ -56,7 +56,7 @@ module.exports = {
     port: 3000,
     open: true,
     hot: true,
-    historyApiFallback: true,
+    historyApiFallback: true, // SPA support
   },
   mode: 'development'
 };
