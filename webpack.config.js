@@ -6,10 +6,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: '', // or './'
     clean: true
   },
   resolve: {
-    extensions: ['.js', '.jsx'], // so you can import without extensions
+    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
@@ -44,6 +45,7 @@ module.exports = {
     port: 3000,
     open: true,
     hot: true,
+    historyApiFallback: true, // SPA support
   },
   mode: 'development'
 };
