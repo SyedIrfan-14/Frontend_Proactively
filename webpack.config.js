@@ -1,15 +1,17 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin'); // Added
 
 module.exports = {
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: './', // Changed to './' for Vercel
     clean: true
   },
   resolve: {
-    extensions: ['.js', '.jsx'], // so you can import without extensions
+    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
@@ -26,7 +28,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'images/[name][ext]'
+          filename: 'images/[name][ext]' // Handles images imported in JS
         }
       }
     ],
@@ -35,6 +37,16 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    // Added: Copies static images from public/images to dist/images
+    new CopyWebpackPlugin({
+      patterns: [
+        { 
+          from: 'public/images',
+          to: 'images',
+          noErrorOnMissing: true // Prevents errors if folder is empty
+        }
+      ]
+    })
   ],
   devServer: {
     static: {
@@ -44,6 +56,7 @@ module.exports = {
     port: 3000,
     open: true,
     hot: true,
+    historyApiFallback: true,
   },
   mode: 'development'
 };
