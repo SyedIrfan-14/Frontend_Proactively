@@ -1,0 +1,23 @@
+/* App-wide layout styling */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; /* Prevents horizontal scroll/whitespace */
+}
+
+/* Optional: spacing between sections except last one */
+section {
+  margin-bottom: 2rem;
+}
+
+/* Remove margin from the last section to prevent extra space at the bottom */
+section:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* If you want to exclude certain sections from spacing, you can do: */
+/* section:not(.pillars-section):not(.hero) {
+  margin-bottom: 2rem;
+} */
